@@ -4,7 +4,7 @@
 **Professor:** Wild Barreto
 **Cliente:** Cena Livre, casa de shows
 **Data:** ___/___/______  **Versão:** 0.2
-**Autor(es):** Eduardo de Souza Silva e demais integrantes do grupo
+**Autor:** Eduardo de Souza Silva
 
 ---
 

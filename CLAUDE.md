@@ -6,7 +6,7 @@ Trabalho da disciplina **Análise de Sistemas**, 3º semestre de ADS, IFBA Irec�
 
 Este repositório é **análise, não implementação**. Não crie código de aplicação, banco de dados nem telas aqui. O produto do trabalho é documentação: Documento de Visão, requisitos e diagramas BPMN.
 
-O tema escolhido pelo grupo é um **sistema de gestão de shows**, chamado "Palco" no documento, feito para o cliente **Cena Livre**, uma casa de shows. Os requisitos e processos saem da entrevista simulada com o dono, em `docs/entrevista.md`; cada requisito cita o problema relatado (A01 a A16) que o originou.
+O trabalho é individual. O tema escolhido é um **sistema de gestão de shows**, chamado "Palco" no documento, feito para o cliente **Cena Livre**, uma casa de shows. Os requisitos e processos saem da entrevista simulada com o dono, em `docs/entrevista.md`; cada requisito cita o problema relatado (A01 a A16) que o originou.
 
 ## O que o professor pediu
 
