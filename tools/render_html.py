@@ -36,7 +36,13 @@ TEMPLATE = """<!doctype html>
 const xml = {xml};
 const viewer = new BpmnJS({{ container: '#canvas' }});
 viewer.importXML(xml).then(() => {{
-  viewer.get('canvas').zoom('fit-viewport', 'auto');
+  // ajusta a altura da area ao formato do diagrama, para a imagem nao sobrar branco
+  const canvas = viewer.get('canvas');
+  const caixa = canvas.viewbox().inner;
+  const div = document.getElementById('canvas');
+  div.style.height = Math.ceil(div.clientWidth * caixa.height / caixa.width) + 40 + 'px';
+  canvas.resized();
+  canvas.zoom('fit-viewport', 'auto');
   document.body.dataset.pronto = 'sim';
 }}).catch(err => {{
   document.body.dataset.pronto = 'erro';
@@ -48,12 +54,12 @@ viewer.importXML(xml).then(() => {{
 """
 
 TITULOS = {
-    "P1": "P1 — Criação e publicação de evento",
-    "P2": "P2 — Venda de ingresso online",
-    "P3": "P3 — Cancelamento e reembolso",
-    "P4": "P4 — Check-in e controle de acesso",
-    "P5": "P5 — Produção e realização do evento",
-    "P6": "P6 — Fechamento financeiro e repasse",
+    "P1": "P1 — Planejamento do show e abertura de vendas",
+    "P2": "P2 — Venda de ingressos nos canais",
+    "P3": "P3 — Cancelamento, remarcação e reembolso",
+    "P4": "P4 — Entrada do público no dia do show",
+    "P5": "P5 — Produção do show",
+    "P6": "P6 — Fechamento financeiro do show",
 }
 
 
@@ -62,7 +68,7 @@ def main():
     for arq in sorted(BPMN_DIR.glob("*.bpmn")):
         chave = arq.name.split("-")[0]
         xml = arq.read_text(encoding="utf-8")
-        altura = 620 if xml.count("<bpmn:lane ") > 3 else 520
+        altura = {3: 520, 4: 620}.get(xml.count("<bpmn:lane "), 720)
         html = TEMPLATE.format(
             titulo=TITULOS.get(chave, arq.stem),
             xml=json.dumps(xml),

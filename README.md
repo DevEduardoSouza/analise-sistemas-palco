@@ -1,15 +1,18 @@
 # Análise de Sistemas — Sistema "Palco"
 
-Análise de um sistema de gestão de eventos e shows, feita para a disciplina de Análise de Sistemas do 3º semestre de ADS do IFBA Irecê, com o professor Wild Barreto.
+Análise de um sistema de gestão de shows para a **Cena Livre**, casa de shows de cerca de quatrocentos lugares, feita para a disciplina de Análise de Sistemas do 3º semestre de ADS do IFBA Irecê, com o professor Wild Barreto.
 
 Este repositório contém a **análise**, não a implementação. A entrega pedida é o Documento de Visão com os requisitos e os diagramas BPMN do processo, anexados ao final, mantendo coerência entre a modelagem e os requisitos mapeados.
+
+Os requisitos e os processos foram levantados numa entrevista com o dono do negócio, registrada em [`docs/entrevista.md`](docs/entrevista.md).
 
 ## O que tem aqui
 
 | Caminho | Conteúdo |
 |---|---|
+| [`docs/entrevista.md`](docs/entrevista.md) | Transcrição da entrevista com o dono da Cena Livre e síntese dos problemas relatados. |
 | [`docs/documento-de-visao.md`](docs/documento-de-visao.md) | Documento de Visão completo, na estrutura do modelo entregue pelo professor. |
-| [`docs/requisitos/requisitos-funcionais.md`](docs/requisitos/requisitos-funcionais.md) | 25 requisitos funcionais detalhados, acima do mínimo de 15 exigido. |
+| [`docs/requisitos/requisitos-funcionais.md`](docs/requisitos/requisitos-funcionais.md) | 32 requisitos funcionais ativos detalhados, acima do mínimo de 15 exigido, com a origem de cada um na entrevista. |
 | [`docs/requisitos/requisitos-nao-funcionais.md`](docs/requisitos/requisitos-nao-funcionais.md) | 26 requisitos não funcionais, por categoria. |
 | [`docs/processos/`](docs/processos/) | Um documento por processo, com atividades, requisitos atendidos e fluxo. |
 | [`docs/rastreabilidade.md`](docs/rastreabilidade.md) | Matriz que liga cada requisito às atividades dos diagramas. |
@@ -21,12 +24,12 @@ Este repositório contém a **análise**, não a implementação. A entrega pedi
 
 | Processo | Nome | Assunto |
 |---|---|---|
-| P1 | Criação e publicação de evento | Da chegada da produtora ao evento no ar, com duas aprovações. |
-| P2 | Venda de ingresso online | Vitrine, reserva temporária, pagamento e emissão do ingresso. |
-| P3 | Cancelamento e reembolso | Política automática, análise manual, invalidação e estorno. |
-| P4 | Check-in e controle de acesso | Portaria com leitura de QR Code e operação offline. |
-| P5 | Produção e realização do evento | Atrações, fornecedores, escala e cronograma do dia. |
-| P6 | Fechamento financeiro e repasse | Consolidação, conferência, fechamento e repasse ao produtor. |
+| P1 | Planejamento do show e abertura de vendas | Da proposta da banda à venda aberta, com agenda, contrato, cotas por canal e convidados. |
+| P2 | Venda de ingressos nos canais | Página de vendas com pagamento confirmado e venda registrada pela loja parceira. |
+| P3 | Cancelamento, remarcação e reembolso | Desistência do cliente, remarcação do show e devolução pelo canal de origem. |
+| P4 | Entrada do público no dia do show | Portaria offline, lista de convidados, venda na porta e controle de lotação. |
+| P5 | Produção do show | Escala com confirmação, cronograma do dia e pagamentos da noite. |
+| P6 | Fechamento financeiro do show | Caixa da porta, resultado prévio, conferência de despesas e acerto do parceiro. |
 
 ## Como os arquivos são gerados
 

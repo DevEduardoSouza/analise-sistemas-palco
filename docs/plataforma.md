@@ -37,6 +37,10 @@ Com o servidor MCP conectado, dá para pedir em linguagem natural e o quadro é 
 
 **Jira.** Bom para rastreabilidade de requisito, que é justamente o ponto cobrado pelo professor, mas pesado demais para um trabalho de disciplina de um semestre.
 
+## Pendência de sincronização
+
+Depois da entrevista com o dono da Cena Livre, os requisitos passaram a ser RF01 a RF33, com o RF03 retirado, e os seis processos foram remodelados. O quadro ainda reflete a versão anterior, de 25 requisitos, e precisa ser atualizado: arquivar o card do RF03, criar os cards de RF26 a RF33 e renomear os cards dos processos.
+
 ## Observação sobre a fonte da verdade
 
 O quadro serve para **acompanhar** o andamento. A fonte da verdade dos requisitos e dos processos continua sendo o repositório, em particular `tools/gen_bpmn.py`, de onde saem os diagramas e a matriz de rastreabilidade. Se o quadro e o repositório divergirem, vale o repositório.

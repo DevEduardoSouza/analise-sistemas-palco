@@ -1,0 +1,351 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" id="Definitions_P3" targetNamespace="http://palco.ifba/bpmn" exporter="gen_bpmn.py" exporterVersion="1.0">
+  <bpmn:collaboration id="Collaboration_P3">
+    <bpmn:participant id="Participant_P3" name="Pós-venda Cena Livre" processRef="Process_P3" />
+  </bpmn:collaboration>
+  <bpmn:process id="Process_P3" name="Cancelamento, remarcação e reembolso" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_P3">
+      <bpmn:lane id="Lane_P3_0" name="Cliente">
+        <bpmn:flowNodeRef>P3_start</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P3_t1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P3_end1</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_P3_1" name="Dono e sócio">
+        <bpmn:flowNodeRef>P3_start2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P3_r1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P3_t3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P3_g2</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_P3_2" name="Bilheteria">
+        <bpmn:flowNodeRef>P3_t8</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_P3_3" name="Sistema Palco">
+        <bpmn:flowNodeRef>P3_r2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P3_end3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P3_t2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P3_g1</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P3_t4</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P3_end2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P3_t5</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P3_g3</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P3_t6</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>P3_t9</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_P3_4" name="Provedor de pagamento">
+        <bpmn:flowNodeRef>P3_t7</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="P3_start" name="Cliente pede devolução">
+      <bpmn:outgoing>Flow_P3_3</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:startEvent id="P3_start2" name="Banda adia ou cancela o show">
+      <bpmn:outgoing>Flow_P3_0</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:userTask id="P3_r1" name="Remarcar data ou cancelar o show">
+      <bpmn:incoming>Flow_P3_0</bpmn:incoming>
+      <bpmn:outgoing>Flow_P3_1</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="P3_r2" name="Avisar compradores e abrir prazo de reembolso">
+      <bpmn:incoming>Flow_P3_1</bpmn:incoming>
+      <bpmn:outgoing>Flow_P3_2</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P3_end3" name="Compradores avisados">
+      <bpmn:incoming>Flow_P3_2</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="P3_t1" name="Solicitar cancelamento">
+      <bpmn:incoming>Flow_P3_3</bpmn:incoming>
+      <bpmn:outgoing>Flow_P3_4</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="P3_t2" name="Localizar compra e verificar política">
+      <bpmn:incoming>Flow_P3_4</bpmn:incoming>
+      <bpmn:outgoing>Flow_P3_5</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="P3_g1" name="Direito automático?">
+      <bpmn:incoming>Flow_P3_5</bpmn:incoming>
+      <bpmn:outgoing>Flow_P3_6</bpmn:outgoing>
+      <bpmn:outgoing>Flow_P3_10</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:userTask id="P3_t3" name="Analisar pedido fora da política">
+      <bpmn:incoming>Flow_P3_6</bpmn:incoming>
+      <bpmn:outgoing>Flow_P3_7</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:exclusiveGateway id="P3_g2" name="Devolução aprovada?">
+      <bpmn:incoming>Flow_P3_7</bpmn:incoming>
+      <bpmn:outgoing>Flow_P3_8</bpmn:outgoing>
+      <bpmn:outgoing>Flow_P3_11</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="P3_t4" name="Notificar recusa com justificativa">
+      <bpmn:incoming>Flow_P3_8</bpmn:incoming>
+      <bpmn:outgoing>Flow_P3_9</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P3_end2" name="Pedido recusado">
+      <bpmn:incoming>Flow_P3_9</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:serviceTask id="P3_t5" name="Cancelar ingressos e devolver à cota">
+      <bpmn:incoming>Flow_P3_10</bpmn:incoming>
+      <bpmn:incoming>Flow_P3_11</bpmn:incoming>
+      <bpmn:outgoing>Flow_P3_12</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="P3_g3" name="Canal da compra">
+      <bpmn:incoming>Flow_P3_12</bpmn:incoming>
+      <bpmn:outgoing>Flow_P3_13</bpmn:outgoing>
+      <bpmn:outgoing>Flow_P3_14</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="P3_t6" name="Solicitar estorno ao provedor">
+      <bpmn:incoming>Flow_P3_13</bpmn:incoming>
+      <bpmn:outgoing>Flow_P3_15</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:serviceTask id="P3_t7" name="Processar estorno">
+      <bpmn:incoming>Flow_P3_15</bpmn:incoming>
+      <bpmn:outgoing>Flow_P3_16</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:userTask id="P3_t8" name="Devolver valor ao comprador identificado">
+      <bpmn:incoming>Flow_P3_14</bpmn:incoming>
+      <bpmn:outgoing>Flow_P3_17</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="P3_t9" name="Registrar reembolso no financeiro do show">
+      <bpmn:incoming>Flow_P3_16</bpmn:incoming>
+      <bpmn:incoming>Flow_P3_17</bpmn:incoming>
+      <bpmn:outgoing>Flow_P3_18</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:endEvent id="P3_end1" name="Reembolso concluído">
+      <bpmn:incoming>Flow_P3_18</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="Flow_P3_0" sourceRef="P3_start2" targetRef="P3_r1" />
+    <bpmn:sequenceFlow id="Flow_P3_1" sourceRef="P3_r1" targetRef="P3_r2" />
+    <bpmn:sequenceFlow id="Flow_P3_2" sourceRef="P3_r2" targetRef="P3_end3" />
+    <bpmn:sequenceFlow id="Flow_P3_3" sourceRef="P3_start" targetRef="P3_t1" />
+    <bpmn:sequenceFlow id="Flow_P3_4" sourceRef="P3_t1" targetRef="P3_t2" />
+    <bpmn:sequenceFlow id="Flow_P3_5" sourceRef="P3_t2" targetRef="P3_g1" />
+    <bpmn:sequenceFlow id="Flow_P3_6" name="não" sourceRef="P3_g1" targetRef="P3_t3" />
+    <bpmn:sequenceFlow id="Flow_P3_7" sourceRef="P3_t3" targetRef="P3_g2" />
+    <bpmn:sequenceFlow id="Flow_P3_8" name="não" sourceRef="P3_g2" targetRef="P3_t4" />
+    <bpmn:sequenceFlow id="Flow_P3_9" sourceRef="P3_t4" targetRef="P3_end2" />
+    <bpmn:sequenceFlow id="Flow_P3_10" name="sim" sourceRef="P3_g1" targetRef="P3_t5" />
+    <bpmn:sequenceFlow id="Flow_P3_11" name="sim" sourceRef="P3_g2" targetRef="P3_t5" />
+    <bpmn:sequenceFlow id="Flow_P3_12" sourceRef="P3_t5" targetRef="P3_g3" />
+    <bpmn:sequenceFlow id="Flow_P3_13" name="online" sourceRef="P3_g3" targetRef="P3_t6" />
+    <bpmn:sequenceFlow id="Flow_P3_14" name="porta ou parceiro" sourceRef="P3_g3" targetRef="P3_t8" />
+    <bpmn:sequenceFlow id="Flow_P3_15" sourceRef="P3_t6" targetRef="P3_t7" />
+    <bpmn:sequenceFlow id="Flow_P3_16" sourceRef="P3_t7" targetRef="P3_t9" />
+    <bpmn:sequenceFlow id="Flow_P3_17" sourceRef="P3_t8" targetRef="P3_t9" />
+    <bpmn:sequenceFlow id="Flow_P3_18" sourceRef="P3_t9" targetRef="P3_end1" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_P3">
+    <bpmndi:BPMNPlane id="Plane_P3" bpmnElement="Collaboration_P3">
+      <bpmndi:BPMNShape id="Participant_P3_di" bpmnElement="Participant_P3" isHorizontal="true">
+        <dc:Bounds x="160" y="80" width="2430" height="710" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_P3_0_di" bpmnElement="Lane_P3_0" isHorizontal="true">
+        <dc:Bounds x="190" y="80" width="2400" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_P3_1_di" bpmnElement="Lane_P3_1" isHorizontal="true">
+        <dc:Bounds x="190" y="200" width="2400" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_P3_2_di" bpmnElement="Lane_P3_2" isHorizontal="true">
+        <dc:Bounds x="190" y="320" width="2400" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_P3_3_di" bpmnElement="Lane_P3_3" isHorizontal="true">
+        <dc:Bounds x="190" y="440" width="2400" height="230" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_P3_4_di" bpmnElement="Lane_P3_4" isHorizontal="true">
+        <dc:Bounds x="190" y="670" width="2400" height="120" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_start_di" bpmnElement="P3_start">
+        <dc:Bounds x="272" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="235" y="164" width="110" height="30" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_start2_di" bpmnElement="P3_start2">
+        <dc:Bounds x="472" y="242" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="435" y="284" width="110" height="30" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_r1_di" bpmnElement="P3_r1">
+        <dc:Bounds x="630" y="220" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_r2_di" bpmnElement="P3_r2">
+        <dc:Bounds x="830" y="570" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_end3_di" bpmnElement="P3_end3">
+        <dc:Bounds x="1072" y="592" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1035" y="634" width="110" height="30" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_t1_di" bpmnElement="P3_t1">
+        <dc:Bounds x="430" y="100" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_t2_di" bpmnElement="P3_t2">
+        <dc:Bounds x="630" y="460" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_g1_di" bpmnElement="P3_g1" isMarkerVisible="true">
+        <dc:Bounds x="865" y="475" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="835" y="531" width="110" height="30" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_t3_di" bpmnElement="P3_t3">
+        <dc:Bounds x="1030" y="220" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_g2_di" bpmnElement="P3_g2" isMarkerVisible="true">
+        <dc:Bounds x="1265" y="235" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1235" y="291" width="110" height="30" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_t4_di" bpmnElement="P3_t4">
+        <dc:Bounds x="1430" y="570" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_end2_di" bpmnElement="P3_end2">
+        <dc:Bounds x="1672" y="592" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1635" y="634" width="110" height="30" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_t5_di" bpmnElement="P3_t5">
+        <dc:Bounds x="1430" y="460" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_g3_di" bpmnElement="P3_g3" isMarkerVisible="true">
+        <dc:Bounds x="1665" y="475" width="50" height="50" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1635" y="531" width="110" height="30" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_t6_di" bpmnElement="P3_t6">
+        <dc:Bounds x="1830" y="460" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_t7_di" bpmnElement="P3_t7">
+        <dc:Bounds x="2030" y="690" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_t8_di" bpmnElement="P3_t8">
+        <dc:Bounds x="1830" y="340" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_t9_di" bpmnElement="P3_t9">
+        <dc:Bounds x="2230" y="460" width="120" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="P3_end1_di" bpmnElement="P3_end1">
+        <dc:Bounds x="2472" y="122" width="36" height="36" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="2435" y="164" width="110" height="30" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Flow_P3_0_di" bpmnElement="Flow_P3_0">
+        <di:waypoint x="508" y="260" />
+        <di:waypoint x="630" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_1_di" bpmnElement="Flow_P3_1">
+        <di:waypoint x="750" y="260" />
+        <di:waypoint x="790" y="260" />
+        <di:waypoint x="790" y="610" />
+        <di:waypoint x="830" y="610" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_2_di" bpmnElement="Flow_P3_2">
+        <di:waypoint x="950" y="610" />
+        <di:waypoint x="1072" y="610" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_3_di" bpmnElement="Flow_P3_3">
+        <di:waypoint x="308" y="140" />
+        <di:waypoint x="430" y="140" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_4_di" bpmnElement="Flow_P3_4">
+        <di:waypoint x="550" y="140" />
+        <di:waypoint x="590" y="140" />
+        <di:waypoint x="590" y="500" />
+        <di:waypoint x="630" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_5_di" bpmnElement="Flow_P3_5">
+        <di:waypoint x="750" y="500" />
+        <di:waypoint x="865" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_6_di" bpmnElement="Flow_P3_6">
+        <di:waypoint x="915" y="500" />
+        <di:waypoint x="972.5" y="500" />
+        <di:waypoint x="972.5" y="260" />
+        <di:waypoint x="1030" y="260" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="980.5" y="370" width="80" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_7_di" bpmnElement="Flow_P3_7">
+        <di:waypoint x="1150" y="260" />
+        <di:waypoint x="1265" y="260" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_8_di" bpmnElement="Flow_P3_8">
+        <di:waypoint x="1315" y="260" />
+        <di:waypoint x="1372.5" y="260" />
+        <di:waypoint x="1372.5" y="610" />
+        <di:waypoint x="1430" y="610" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1380.5" y="425" width="80" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_9_di" bpmnElement="Flow_P3_9">
+        <di:waypoint x="1550" y="610" />
+        <di:waypoint x="1672" y="610" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_10_di" bpmnElement="Flow_P3_10">
+        <di:waypoint x="915" y="500" />
+        <di:waypoint x="1430" y="500" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1132.5" y="476" width="80" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_11_di" bpmnElement="Flow_P3_11">
+        <di:waypoint x="1315" y="260" />
+        <di:waypoint x="1372.5" y="260" />
+        <di:waypoint x="1372.5" y="500" />
+        <di:waypoint x="1430" y="500" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1380.5" y="370" width="80" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_12_di" bpmnElement="Flow_P3_12">
+        <di:waypoint x="1550" y="500" />
+        <di:waypoint x="1665" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_13_di" bpmnElement="Flow_P3_13">
+        <di:waypoint x="1715" y="500" />
+        <di:waypoint x="1830" y="500" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1732.5" y="476" width="80" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_14_di" bpmnElement="Flow_P3_14">
+        <di:waypoint x="1715" y="500" />
+        <di:waypoint x="1772.5" y="500" />
+        <di:waypoint x="1772.5" y="380" />
+        <di:waypoint x="1830" y="380" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="1780.5" y="430" width="80" height="20" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_15_di" bpmnElement="Flow_P3_15">
+        <di:waypoint x="1950" y="500" />
+        <di:waypoint x="1990" y="500" />
+        <di:waypoint x="1990" y="730" />
+        <di:waypoint x="2030" y="730" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_16_di" bpmnElement="Flow_P3_16">
+        <di:waypoint x="2150" y="730" />
+        <di:waypoint x="2190" y="730" />
+        <di:waypoint x="2190" y="500" />
+        <di:waypoint x="2230" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_17_di" bpmnElement="Flow_P3_17">
+        <di:waypoint x="1950" y="380" />
+        <di:waypoint x="2090" y="380" />
+        <di:waypoint x="2090" y="500" />
+        <di:waypoint x="2230" y="500" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_P3_18_di" bpmnElement="Flow_P3_18">
+        <di:waypoint x="2350" y="500" />
+        <di:waypoint x="2411" y="500" />
+        <di:waypoint x="2411" y="140" />
+        <di:waypoint x="2472" y="140" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

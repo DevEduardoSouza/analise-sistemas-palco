@@ -1,191 +1,246 @@
 # Requisitos Funcionais — Sistema Palco
 
-Sistema de gestão de eventos e shows. Documento de apoio ao Documento de Visão.
-A entrega exige no mínimo 15 requisitos funcionais detalhados; aqui estão 25.
+Sistema de gestão de shows da **Cena Livre**, casa de shows com capacidade para cerca de quatrocentas pessoas, que também realiza shows maiores em espaços alugados. Documento de apoio ao Documento de Visão.
+
+Os requisitos foram levantados na [entrevista com o dono do negócio](../entrevista.md). A coluna **Origem** aponta os problemas relatados, numerados de A01 a A16 na síntese da entrevista. A entrega exige no mínimo 15 requisitos funcionais detalhados; aqui estão 32 ativos.
 
 Convenções:
 
-- **Código**: identificador estável, nunca reaproveitado.
+- **Código**: identificador estável, nunca reaproveitado. O RF03 foi retirado e o código não volta a ser usado.
 - **Ator**: perfil que executa a funcionalidade.
 - **Prioridade**: Essencial (o produto não existe sem ele), Importante (perda relevante de valor), Desejável (melhoria).
 - **Processo**: processo BPMN em que o requisito aparece, garantindo a coerência entre modelagem e requisitos.
 
-| Código | Nome | Ator | Prioridade | Processo |
-|---|---|---|---|---|
-| RF01 | Gestão de usuários e perfis de acesso | Administrador | Essencial | P1 |
-| RF02 | Autenticação e recuperação de senha | Todos | Essencial | P1, P2 |
-| RF03 | Cadastro de produtor e dados de recebimento | Administrador | Essencial | P1, P6 |
-| RF04 | Cadastro de locais e setores | Produtor | Essencial | P1 |
-| RF05 | Cadastro de evento | Produtor | Essencial | P1 |
-| RF06 | Gestão de sessões do evento | Produtor | Essencial | P1 |
-| RF07 | Gestão de lotes e tabela de preços | Produtor | Essencial | P1, P2 |
-| RF08 | Submissão, aprovação e publicação do evento | Produtor, Administrador | Essencial | P1 |
-| RF09 | Vitrine pública e busca de eventos | Cliente | Essencial | P2 |
-| RF10 | Carrinho com reserva temporária de ingressos | Cliente | Essencial | P2 |
-| RF11 | Checkout e processamento de pagamento | Cliente | Essencial | P2 |
-| RF12 | Emissão de ingresso digital com QR Code | Sistema | Essencial | P2, P4 |
-| RF13 | Meia-entrada e validação de comprovante | Cliente, Portaria | Importante | P2, P4 |
-| RF14 | Cupons de desconto e cortesias | Produtor | Importante | P2 |
-| RF15 | Cancelamento de pedido e reembolso | Cliente, Financeiro | Essencial | P3 |
-| RF16 | Transferência e nominação de ingresso | Cliente | Importante | P2, P4 |
-| RF17 | Check-in e validação de acesso | Portaria | Essencial | P4 |
-| RF18 | Operação offline da portaria e sincronização | Portaria | Importante | P4 |
-| RF19 | Gestão de equipe e escala do evento | Produtor | Importante | P5 |
-| RF20 | Gestão de atrações, fornecedores e contratos | Produtor | Importante | P5 |
-| RF21 | Cronograma de produção do dia do evento | Produtor | Importante | P5 |
-| RF22 | Painel financeiro e fechamento do evento | Financeiro, Produtor | Essencial | P6 |
-| RF23 | Relatórios gerenciais e exportação | Produtor, Financeiro | Importante | P6 |
-| RF24 | Notificações e comunicação com o público | Sistema, Produtor | Importante | P1, P2, P3, P5 |
-| RF25 | Registro de auditoria das operações críticas | Sistema | Desejável | Todos |
+| Código | Nome | Ator | Prioridade | Processo | Origem |
+|---|---|---|---|---|---|
+| RF01 | Gestão de usuários e perfis de acesso | Dono | Essencial | Apoio | Atores da entrevista |
+| RF02 | Autenticação e recuperação de senha | Todos | Essencial | Apoio | Atores da entrevista |
+| RF03 | *Retirado* | — | — | — | — |
+| RF04 | Cadastro de locais e montagens | Dono | Essencial | P1 | A03 |
+| RF05 | Cadastro de show | Dono | Essencial | P1 | A01 |
+| RF06 | Gestão de sessões do show | Dono | Importante | P1 | A01 |
+| RF07 | Gestão de lotes e tabela de preços | Sócio | Essencial | P1 | A04 |
+| RF08 | Verificação e abertura das vendas | Dono, Sistema | Essencial | P1 | A04 |
+| RF09 | Página pública de vendas do show | Cliente | Essencial | P1, P2 | A06 |
+| RF10 | Carrinho com reserva temporária de ingressos | Cliente | Essencial | P2 | A04 |
+| RF11 | Pagamento online com confirmação automática | Cliente | Essencial | P2 | A06 |
+| RF12 | Emissão de ingresso digital com QR Code | Sistema | Essencial | P2, P3, P4 | A06 |
+| RF13 | Meia-entrada e validação de comprovante | Cliente, Portaria | Importante | P2, P4 | A09 |
+| RF14 | Cupons de desconto | Sócio | Desejável | P2 | Prioridade de lote promocional |
+| RF15 | Cancelamento de compra e reembolso | Cliente, Dono e sócio, Bilheteria | Essencial | P3 | A12 |
+| RF16 | Transferência e nominação de ingresso | Cliente | Importante | P4 | A11 |
+| RF17 | Check-in e validação de acesso | Portaria | Essencial | P4 | A06 |
+| RF18 | Operação offline da portaria e sincronização | Portaria | Essencial | P4 | A10 |
+| RF19 | Escala da equipe com confirmação | Dono, Sócio, Equipe | Importante | P5 | A14 |
+| RF20 | Atrações, fornecedores e contratos | Dono, Sócio | Importante | P1, P5 | A02 |
+| RF21 | Cronograma de produção do dia do show | Sócio | Importante | P5 | Relato do dia do show |
+| RF22 | Resultado financeiro e fechamento do show | Sócio, Dono | Essencial | P3, P6 | A16 |
+| RF23 | Relatórios gerenciais e exportação | Dono, Sócio, Administrativo | Importante | P5, P6 | A16 |
+| RF24 | Notificações e comunicação | Sistema | Importante | P1, P2, P3, P5 | A13, A14 |
+| RF25 | Registro de auditoria das operações críticas | Sistema | Desejável | Apoio | A12, A15 |
+| RF26 | Agenda de datas da casa | Dono, Sócio | Essencial | P1, P3 | A01 |
+| RF27 | Distribuição de ingressos por canal | Dono | Essencial | P1, P2, P3 | A04 |
+| RF28 | Lista de convidados com cotas | Dono, Portaria | Essencial | P1, P4 | A05 |
+| RF29 | Venda pela loja parceira e acerto | Loja parceira, Sócio | Essencial | P1, P2, P3, P6 | A07 |
+| RF30 | Venda e caixa da bilheteria na porta | Bilheteria | Essencial | P3, P4, P6 | A08 |
+| RF31 | Remarcação e cancelamento de show | Dono e sócio | Importante | P3 | A13 |
+| RF32 | Controle de lotação em tempo real | Portaria, Bilheteria | Essencial | P4 | A11 |
+| RF33 | Lançamento de despesas e pagamentos | Sócio, Administrativo | Essencial | P1, P5, P6 | A02, A15 |
 
 ---
 
 ## RF01 — Gestão de usuários e perfis de acesso
 
-**Ator:** Administrador. **Prioridade:** Essencial. **Processo:** P1.
+**Ator:** Dono. **Prioridade:** Essencial. **Processo:** apoio a todos.
 
-Permite cadastrar, editar, inativar e listar usuários do sistema, atribuindo a cada um os perfis Administrador, Produtor, Financeiro, Portaria ou Cliente. Um mesmo usuário pode acumular perfis, por exemplo Produtor e Financeiro em uma produtora pequena. O cadastro registra nome, CPF, e-mail, telefone, perfis, produtora vinculada e situação. O sistema não permite excluir fisicamente um usuário que já tenha operações registradas; nesse caso apenas a inativação é permitida, preservando o histórico. Cada perfil determina quais telas e ações ficam disponíveis, e a tentativa de acesso a uma função sem permissão é bloqueada e registrada conforme RF25.
+Permite cadastrar, editar, inativar e listar usuários do sistema, atribuindo a cada um os perfis Dono, Sócio, Administrativo, Bilheteria, Portaria, Loja parceira e Cliente. Um mesmo usuário pode acumular perfis; na Cena Livre, por exemplo, a mesma pessoa pode trabalhar na bilheteria e na portaria. O cadastro registra nome, CPF, telefone, e-mail, perfis e situação. O usuário da loja parceira fica vinculado ao parceiro e só enxerga a cota e as vendas desse parceiro. Usuários com operações registradas não podem ser excluídos, apenas inativados, preservando o histórico. A tentativa de acesso a uma função sem permissão é bloqueada e registrada conforme RF25.
 
 ## RF02 — Autenticação e recuperação de senha
 
-**Ator:** Todos. **Prioridade:** Essencial. **Processos:** P1, P2.
+**Ator:** Todos. **Prioridade:** Essencial. **Processo:** apoio a todos.
 
-Permite o acesso ao sistema mediante e-mail e senha, com bloqueio temporário da conta após cinco tentativas incorretas consecutivas. O cliente também pode se autenticar por conta Google. A recuperação de senha é feita por link de uso único enviado ao e-mail cadastrado, com validade de trinta minutos. Perfis administrativos, Administrador e Financeiro, exigem segundo fator de autenticação por aplicativo autenticador. O encerramento da sessão ocorre por inatividade de trinta minutos nos perfis administrativos.
+Permite o acesso mediante e-mail ou telefone e senha, com bloqueio temporário após cinco tentativas incorretas consecutivas. O cliente também pode se autenticar por conta Google. A recuperação de senha é feita por link de uso único enviado ao e-mail ou por código enviado ao telefone cadastrado, com validade de trinta minutos. Os perfis Dono e Sócio, que acessam os valores financeiros, exigem segundo fator de autenticação. A sessão dos perfis Bilheteria e Portaria permanece aberta durante toda a noite do show, para não interromper a fila com novo login.
 
-## RF03 — Cadastro de produtor e dados de recebimento
+## RF03 — Retirado
 
-**Ator:** Administrador. **Prioridade:** Essencial. **Processos:** P1, P6.
+Cadastro de produtora com aprovação por administrador de plataforma. Retirado depois da entrevista, porque o sistema atende uma única casa de shows e não várias produtoras. O código não é reaproveitado.
 
-Permite cadastrar a produtora responsável pelos eventos, com razão social, nome fantasia, CNPJ ou CPF, endereço, responsável legal, contatos e dados bancários para repasse, incluindo banco, agência, conta e chave Pix. O produtor só pode submeter eventos para publicação após ter o cadastro aprovado pelo Administrador, com documentos anexados. Alterações nos dados bancários exigem nova aprovação e ficam registradas no histórico, porque afetam diretamente o repasse tratado em RF22.
+## RF04 — Cadastro de locais e montagens
 
-## RF04 — Cadastro de locais e setores
+**Ator:** Dono. **Prioridade:** Essencial. **Processo:** P1. **Origem:** A03.
 
-**Ator:** Produtor. **Prioridade:** Essencial. **Processo:** P1.
+Permite cadastrar os locais onde os shows acontecem, a casa própria e os espaços alugados, como clubes e salões, com nome, endereço, capacidade máxima autorizada e, para espaços alugados, o valor do aluguel. Cada local possui uma ou mais montagens, por exemplo "Em pé" e "Com mesas ao lado do bar", cada uma com capacidade própria, porque o dono relatou que a lotação da casa muda conforme a disposição. A capacidade de uma montagem não pode ultrapassar a capacidade máxima do local. A montagem escolhida para o show define o total de lugares usado em RF27 e RF32.
 
-Permite cadastrar os locais onde os eventos ocorrem, com nome, endereço completo, capacidade total, coordenadas geográficas e informações de acessibilidade. Cada local é dividido em setores, por exemplo Pista, Camarote, Arquibancada e Área Acessível, e cada setor possui nome, capacidade própria e indicação de lugar marcado ou não marcado. A soma das capacidades dos setores não pode ultrapassar a capacidade total do local. Locais já usados em eventos publicados não podem ter setores excluídos, apenas inativados.
+## RF05 — Cadastro de show
 
-## RF05 — Cadastro de evento
+**Ator:** Dono. **Prioridade:** Essencial. **Processo:** P1. **Origem:** A01.
 
-**Ator:** Produtor. **Prioridade:** Essencial. **Processo:** P1.
+Permite cadastrar o show com nome, atração principal, bandas de abertura, descrição, imagem de divulgação, classificação indicativa, local e montagem, política de meia-entrada e política de cancelamento. O show percorre as situações Em negociação, Confirmado, À venda, Realizado, Fechado e Cancelado. Nasce Em negociação, vinculado a uma pré-reserva de data de RF26, e só passa a Confirmado quando o contrato da atração é registrado em RF20. O sistema permite editar, duplicar e pesquisar shows por nome, período, local e situação. A duplicação copia montagem, lotes e cotas, poupando retrabalho em shows recorrentes.
 
-Permite cadastrar um evento com nome, descrição, categoria, classificação indicativa, local, imagem de divulgação, política de meia-entrada, política de cancelamento e produtora responsável. O evento nasce na situação Rascunho e só se torna visível ao público após passar pelo fluxo de RF08. O sistema deve permitir editar, duplicar, pesquisar por nome, período, categoria e situação, e listar os eventos da produtora do usuário logado. A duplicação copia setores, sessões e lotes, poupando retrabalho em eventos recorrentes.
+## RF06 — Gestão de sessões do show
 
-## RF06 — Gestão de sessões do evento
+**Ator:** Dono. **Prioridade:** Importante. **Processo:** P1. **Origem:** A01.
 
-**Ator:** Produtor. **Prioridade:** Essencial. **Processo:** P1.
-
-Permite cadastrar uma ou mais sessões para o mesmo evento, cada uma com data, horário de abertura dos portões, horário de início, horário previsto de término e setores disponíveis. Um show que se repete em três noites é um evento com três sessões, e cada sessão controla o próprio estoque de ingressos. O sistema impede cadastrar duas sessões no mesmo local com horários sobrepostos e alerta o produtor quando a data da sessão for anterior à data atual.
+Permite cadastrar uma ou mais sessões para o mesmo show, cada uma com data, horário de abertura da porta, horário de início e horário previsto de término. Um show que se repete em duas noites é um show com duas sessões, e cada sessão controla o próprio estoque de ingressos e a própria lotação. O horário de abertura da porta cadastrado aqui é o horário anunciado ao público, conferido contra o cronograma de RF21.
 
 ## RF07 — Gestão de lotes e tabela de preços
 
-**Ator:** Produtor. **Prioridade:** Essencial. **Processos:** P1, P2.
+**Ator:** Sócio. **Prioridade:** Essencial. **Processo:** P1. **Origem:** A04.
 
-Permite definir, para cada setor de cada sessão, os lotes de venda com nome, quantidade de ingressos, preço inteiro, preço de meia-entrada, taxa de serviço, data de início e data de fim da vigência. A virada de lote ocorre automaticamente quando a quantidade se esgota ou quando a data final é atingida, o que acontecer primeiro. O sistema impede que a soma das quantidades dos lotes ultrapasse a capacidade do setor e mantém histórico dos preços praticados, informação necessária para o cálculo de reembolso em RF15.
+Permite definir os lotes de venda de cada sessão, com nome, quantidade, preço inteiro, preço de meia-entrada, data de início e data de fim. O primeiro lote pode ser marcado como promocional, prática relatada pelo dono para "criar movimento". A virada de lote ocorre automaticamente quando a quantidade se esgota ou quando a data final é atingida, o que acontecer primeiro. O preço de venda na porta é definido à parte, e pode ser informado na abertura das vendas ou apenas no dia do show, ponto que o dono ficou de confirmar com o sócio. O sistema mantém histórico dos preços praticados, necessário para o reembolso de RF15.
 
-## RF08 — Submissão, aprovação e publicação do evento
+## RF08 — Verificação e abertura das vendas
 
-**Ator:** Produtor e Administrador. **Prioridade:** Essencial. **Processo:** P1.
+**Ator:** Dono e Sistema. **Prioridade:** Essencial. **Processo:** P1. **Origem:** A04.
 
-Permite ao produtor submeter o evento à análise quando ele já tiver local, ao menos uma sessão e ao menos um lote configurado. O Administrador analisa e pode aprovar, reprovar com justificativa ou solicitar ajustes. Na aprovação o evento passa a Publicado e fica visível na vitrine de RF09 na data e hora de início de vendas definidas. O produtor pode despublicar um evento sem vendas registradas; havendo vendas, a retirada do ar só ocorre pelo processo de cancelamento de RF15. Todas as transições de situação são notificadas conforme RF24 e registradas conforme RF25.
+Antes de abrir as vendas, o sistema verifica se o show tem data confirmada em RF26, contrato da atração registrado em RF20, local e montagem definidos em RF04, ingressos distribuídos por canal em RF27, ao menos um lote configurado em RF07 e cotas de convidados definidas em RF28. As pendências são listadas ao dono para que ele complete. Sem pendências, o dono abre as vendas, o show passa a À venda, a página pública de RF09 é publicada e as cotas ficam disponíveis à loja parceira e à bilheteria. O dono relatou que o post do Instagram precisa sair com a venda pronta, então o link da página é gerado já nesse momento, para ser entregue a quem faz a divulgação.
 
-## RF09 — Vitrine pública e busca de eventos
+## RF09 — Página pública de vendas do show
 
-**Ator:** Cliente. **Prioridade:** Essencial. **Processo:** P2.
+**Ator:** Cliente. **Prioridade:** Essencial. **Processos:** P1, P2. **Origem:** A06.
 
-Permite ao público consultar os eventos publicados sem necessidade de login, com busca por texto livre, filtros de cidade, categoria, faixa de preço e período, e ordenação por data ou por relevância. A página do evento apresenta descrição, sessões, setores, lotes disponíveis, preços com taxa destacada, política de meia-entrada, política de cancelamento e mapa do local. Setores esgotados aparecem marcados como indisponíveis, e não ocultos, para não gerar dúvida no comprador.
+Disponibiliza, sem necessidade de login, uma página para cada show à venda, acessada pelo link divulgado no Instagram, com imagem, descrição, data, horário de abertura da porta, local, lotes disponíveis e preços, política de meia-entrada e política de cancelamento. Disponibiliza também a agenda pública com os próximos shows da casa. Lotes esgotados aparecem marcados como indisponíveis, e não ocultos. A página substitui o site feito por um conhecido, citado na entrevista, que não confirmava o pagamento sozinho.
 
 ## RF10 — Carrinho com reserva temporária de ingressos
 
-**Ator:** Cliente. **Prioridade:** Essencial. **Processo:** P2.
+**Ator:** Cliente. **Prioridade:** Essencial. **Processo:** P2. **Origem:** A04.
 
-Permite ao cliente selecionar sessão, setor, tipo de ingresso e quantidade, respeitando o limite máximo por CPF definido pelo produtor no evento. Ao adicionar itens ao carrinho, o sistema cria uma reserva temporária que retira os ingressos do estoque disponível por quinze minutos, exibindo o tempo restante. Expirado o prazo sem conclusão do pagamento, a reserva é liberada automaticamente e o estoque volta a ficar disponível. O carrinho aceita ingressos de sessões diferentes do mesmo evento em um único pedido.
+Permite ao cliente selecionar sessão, tipo de ingresso e quantidade, respeitando o limite por CPF definido para o show. Ao iniciar a compra, o sistema reserva os ingressos na cota do canal online de RF27 por quinze minutos, exibindo o tempo restante. Expirado o prazo sem pagamento aprovado, a reserva é liberada e os ingressos voltam à cota. A reserva impede que dois compradores levem o último ingresso ao mesmo tempo.
 
-## RF11 — Checkout e processamento de pagamento
+## RF11 — Pagamento online com confirmação automática
 
-**Ator:** Cliente. **Prioridade:** Essencial. **Processo:** P2.
+**Ator:** Cliente. **Prioridade:** Essencial. **Processo:** P2. **Origem:** A06.
 
-Permite concluir a compra informando os dados do comprador, nome, CPF, e-mail e telefone, e escolhendo entre cartão de crédito, Pix ou boleto. O sistema envia a cobrança ao provedor de pagamento e mantém o pedido na situação Aguardando pagamento até o retorno da confirmação. Pagamento aprovado leva o pedido a Pago e dispara a emissão de RF12. Pagamento recusado devolve o cliente ao checkout com a mensagem do provedor, mantendo a reserva enquanto durar o prazo de RF10. Pix e boleto não pagos dentro do prazo levam o pedido a Expirado e liberam o estoque. O sistema nunca armazena o número completo do cartão, guardando apenas bandeira e quatro últimos dígitos.
+Permite concluir a compra informando nome, CPF, e-mail e telefone e pagando por Pix ou cartão de crédito. O sistema envia a cobrança ao provedor de pagamento e aguarda a confirmação enviada pelo próprio provedor, sem depender de comprovante encaminhado pelo cliente. Esse é o ponto que elimina o print de comprovante reutilizado relatado pelo dono. Pagamento aprovado leva a compra a Paga e dispara a emissão de RF12. Pagamento recusado ou Pix não pago no prazo da reserva libera os ingressos. O sistema nunca armazena o número completo do cartão.
 
 ## RF12 — Emissão de ingresso digital com QR Code
 
-**Ator:** Sistema. **Prioridade:** Essencial. **Processos:** P2, P4.
+**Ator:** Sistema. **Prioridade:** Essencial. **Processos:** P2, P3, P4. **Origem:** A06.
 
-Gera, para cada ingresso de um pedido pago, um registro individual com código único, QR Code assinado digitalmente, identificação do evento, sessão, setor, tipo de ingresso, nome do portador e situação. O ingresso é disponibilizado na área do cliente e enviado por e-mail em PDF. O código do QR não é sequencial nem previsível, e sua assinatura permite validar a autenticidade em RF17 mesmo com a portaria operando offline. A reemissão do arquivo é permitida sem gerar novo código, evitando duplicidade de acesso.
+Gera, para cada ingresso pago, emitido pela loja parceira ou vendido na porta, um código único com QR Code assinado digitalmente, contendo show, sessão, tipo de ingresso, canal de venda e nome do portador. O ingresso é enviado por e-mail em PDF e fica disponível na área do cliente. Como o dono relatou que há quem chegue sem internet para abrir o código, o PDF pode ser salvo no aparelho e a portaria também encontra o ingresso pelo CPF em RF17. O código não é sequencial nem previsível. Ingressos cancelados em RF15 ficam inválidos para a portaria.
 
 ## RF13 — Meia-entrada e validação de comprovante
 
-**Ator:** Cliente e Portaria. **Prioridade:** Importante. **Processos:** P2, P4.
+**Ator:** Cliente e Portaria. **Prioridade:** Importante. **Processos:** P2, P4. **Origem:** A09.
 
-Permite a compra de ingresso de meia-entrada respeitando a cota legal definida por sessão, informando a categoria do benefício, estudante, idoso, pessoa com deficiência ou jovem de baixa renda, e anexando o comprovante quando o produtor exigir. O ingresso de meia-entrada é sempre nominal e recebe marcação visível no QR Code, para que a portaria exija a apresentação do documento comprobatório em RF17. Esgotada a cota, o sistema oferece apenas ingressos inteiros.
+Permite a compra de meia-entrada respeitando a cota definida por sessão, informando a categoria do benefício, por exemplo estudante, idoso, pessoa com deficiência, jovem de baixa renda ou professor quando houver lei local, e anexando o comprovante quando exigido. O ingresso de meia é sempre nominal e aparece destacado na tela da portaria, que só libera a entrada após marcar a conferência do documento em RF17. Esgotada a cota, o sistema oferece apenas ingressos inteiros. A quantidade de meias vendidas e conferidas aparece separada no resultado de RF22, atendendo à dificuldade do dono de separar meia-entrada no caixa.
 
-## RF14 — Cupons de desconto e cortesias
+## RF14 — Cupons de desconto
 
-**Ator:** Produtor. **Prioridade:** Importante. **Processo:** P2.
+**Ator:** Sócio. **Prioridade:** Desejável. **Processo:** P2.
 
-Permite ao produtor criar cupons com código, tipo de desconto percentual ou valor fixo, quantidade de usos, validade e restrição por evento, sessão ou setor. Permite ainda emitir cortesias, ingressos com valor zero destinados a convidados, imprensa e permutas, com controle de cota separado do estoque de venda. O cliente aplica o cupom no checkout de RF11, com validação imediata e mensagem clara quando o cupom estiver expirado, esgotado ou não aplicável. Cortesias e cupons entram no fechamento de RF22 como dedução de receita.
+Permite criar cupons com código, desconto percentual ou valor fixo, quantidade de usos, validade e restrição por show ou sessão, para ações de divulgação. O cliente aplica o cupom no pagamento de RF11, com validação imediata e mensagem clara quando o cupom estiver expirado, esgotado ou não aplicável. Os descontos concedidos entram no resultado de RF22 como dedução de receita. Ingressos gratuitos para convidados não são cupons e seguem RF28.
 
-## RF15 — Cancelamento de pedido e reembolso
+## RF15 — Cancelamento de compra e reembolso
 
-**Ator:** Cliente e Financeiro. **Prioridade:** Essencial. **Processo:** P3.
+**Ator:** Cliente, Dono e sócio, Bilheteria. **Prioridade:** Essencial. **Processo:** P3. **Origem:** A12.
 
-Permite ao cliente solicitar o cancelamento da compra pela área do cliente e ao Financeiro processar o reembolso. O sistema aplica a política do evento, com devolução integral quando a solicitação ocorre até sete dias após a compra e até quarenta e oito horas antes da sessão. Fora dessa janela, a solicitação segue para análise manual do Financeiro, que pode aprovar ou recusar com justificativa. Aprovado o cancelamento, os ingressos são invalidados, impedindo o check-in de RF17, o estoque retorna ao lote de origem e o estorno é solicitado ao provedor de pagamento. O cancelamento do evento inteiro pelo produtor dispara o reembolso integral automático de todos os pedidos pagos e a notificação de RF24.
+Permite ao cliente solicitar o cancelamento pela área do cliente ou pelo link do e-mail, e à bilheteria registrar pedidos feitos pessoalmente. O sistema localiza a compra pelo código ou CPF e aplica a política do show: devolução integral quando a solicitação ocorre até sete dias após a compra e até quarenta e oito horas antes da sessão, ou quando o show foi remarcado em RF31. Fora dessas condições, o pedido segue para análise do dono e do sócio, que aprovam ou recusam com justificativa. Aprovado o cancelamento, os ingressos são invalidados e voltam à cota do canal de origem. A devolução segue o canal da compra: estorno pelo provedor de pagamento para compras online, e devolução pela bilheteria ou pela loja parceira para as demais, sempre ao comprador identificado na venda. O dono relatou devolução feita à pessoa errada por nome parecido, então o registro exige o CPF de quem recebe.
 
 ## RF16 — Transferência e nominação de ingresso
 
-**Ator:** Cliente. **Prioridade:** Importante. **Processos:** P2, P4.
+**Ator:** Cliente. **Prioridade:** Importante. **Processo:** P4. **Origem:** A11.
 
-Permite ao comprador atribuir cada ingresso a um portador, informando nome e CPF, e transferir um ingresso ainda não utilizado para outra pessoa por e-mail. A transferência invalida o QR Code anterior e emite um novo para o destinatário, evitando que os dois códigos circulem. O produtor pode desabilitar a transferência por evento e o sistema bloqueia transferências a partir de duas horas antes da abertura dos portões.
+Permite ao comprador atribuir cada ingresso a um portador, informando nome e CPF, e transferir um ingresso não utilizado para outra pessoa. A transferência invalida o QR Code anterior e emite um novo, evitando dois códigos válidos para o mesmo lugar. O dono relatou confusão na porta com nomes escritos diferente do documento, por isso a portaria confere o portador pelo CPF e não pela grafia do nome. A transferência é bloqueada a partir de duas horas antes da abertura da porta.
 
 ## RF17 — Check-in e validação de acesso
 
-**Ator:** Portaria. **Prioridade:** Essencial. **Processo:** P4.
+**Ator:** Portaria. **Prioridade:** Essencial. **Processo:** P4. **Origem:** A06.
 
-Permite ao operador de portaria ler o QR Code do ingresso pela câmera do dispositivo e obter uma resposta imediata em até dois segundos, com três resultados possíveis. Acesso liberado, quando o ingresso é válido, pertence à sessão em curso e ainda não foi utilizado, registrando data, hora, operador e portão. Acesso negado, quando o ingresso é inválido, cancelado, de outra sessão ou já utilizado, exibindo o motivo e o horário do uso anterior. Verificação manual, quando o ingresso é de meia-entrada ou nominal, exigindo conferência do documento antes da liberação. O sistema permite também a busca por CPF ou código do pedido para atender quem chegou sem o ingresso em mãos.
+Permite à portaria ler o QR Code pela câmera do celular, ou buscar por CPF ou nome, e obter em até dois segundos um de três resultados. Acesso liberado, quando o ingresso ou convite é válido, pertence à sessão e ainda não foi usado. Acesso negado, quando é inválido, cancelado, de outra sessão ou já usado, exibindo o motivo e o horário da entrada anterior. Verificação manual, quando o ingresso é de meia-entrada ou nominal, exigindo conferência do documento. Cada entrada registra data, hora, operador e ponto de entrada e atualiza a lotação de RF32. É o requisito que atende a segunda prioridade do dono: ninguém entra duas vezes com o mesmo comprovante.
 
 ## RF18 — Operação offline da portaria e sincronização
 
-**Ator:** Portaria. **Prioridade:** Importante. **Processo:** P4.
+**Ator:** Portaria. **Prioridade:** Essencial. **Processo:** P4. **Origem:** A10.
 
-Permite que o aplicativo de portaria baixe previamente a lista de ingressos válidos da sessão e continue validando acessos sem conexão de rede, situação comum em espaços abertos e casas de show. Os check-ins realizados offline ficam em fila local e são enviados ao servidor assim que a conexão retorna. Em caso de conflito, quando o mesmo ingresso foi validado em dois dispositivos, o sistema mantém o primeiro registro pelo horário do evento, marca o segundo como duplicidade e o apresenta no relatório de ocorrências da sessão.
+Permite que o aplicativo de portaria baixe antes da abertura da porta os ingressos válidos e a lista de convidados da sessão e continue validando sem conexão, situação que já aconteceu na Cena Livre e obrigou a equipe a usar a lista impressa. As entradas feitas offline ficam em fila local e são enviadas ao servidor quando a conexão volta. Com mais de um celular na porta, os aparelhos trocam as entradas entre si pela rede local quando disponível. Havendo conflito, o sistema mantém o primeiro registro pelo horário e marca o segundo como duplicidade no relatório de ocorrências.
 
-## RF19 — Gestão de equipe e escala do evento
+## RF19 — Escala da equipe com confirmação
 
-**Ator:** Produtor. **Prioridade:** Importante. **Processo:** P5.
+**Ator:** Dono, Sócio e Equipe. **Prioridade:** Importante. **Processo:** P5. **Origem:** A14.
 
-Permite montar a equipe de cada sessão definindo funções, por exemplo portaria, segurança, bar, limpeza e produção, quantidade de pessoas por função, nomes, horário de entrada e saída e valor de diária. O sistema alerta quando uma pessoa é escalada em duas sessões com horários sobrepostos e permite registrar a presença efetiva no dia, informação que alimenta o custo de pessoal no fechamento de RF22.
+Permite montar a equipe de cada sessão por função, técnico de som, técnico de luz, segurança, bilheteria, bar e portaria, com nome, telefone, horário de chegada e forma de cobrança, por show ou por diária. O sistema envia o convite a cada pessoa com data, função, horário e valor, e a pessoa confirma ou recusa pelo link recebido. O dono vê quem ainda não confirmou e substitui a pessoa ou registra a contratação de empresa terceirizada, tratada como fornecedor em RF20. No dia, o sócio registra a presença efetiva, e o valor devido de cada presença gera uma despesa pendente em RF33.
 
-## RF20 — Gestão de atrações, fornecedores e contratos
+## RF20 — Atrações, fornecedores e contratos
 
-**Ator:** Produtor. **Prioridade:** Importante. **Processo:** P5.
+**Ator:** Dono e Sócio. **Prioridade:** Importante. **Processos:** P1, P5. **Origem:** A02.
 
-Permite cadastrar as atrações do evento, com nome artístico, contato, cachê, forma de pagamento, horário de apresentação e requisitos técnicos, além dos fornecedores de som, luz, palco, alimentação e segurança, com valores contratados. Permite anexar contratos e registrar a situação de cada compromisso, contratado, sinal pago ou quitado. Os valores lançados compõem a previsão de custos e o resultado do evento em RF22.
+Permite cadastrar as atrações do show, com nome artístico, contato do empresário, cachê, valor e data do sinal, forma de pagamento do restante e requisitos técnicos, e os fornecedores, como empresa de segurança terceirizada, aluguel de som e luz e aluguel de espaço, com valores e prazos combinados. Permite anexar o contrato ou, na falta dele, a imagem da mensagem que confirmou data e cachê, prática relatada pelo dono. Cada compromisso tem situação Combinado, Sinal pago ou Quitado. O sócio usa o cachê informado para avaliar a viabilidade do show antes de confirmá-lo, e os valores compõem as despesas previstas de RF33.
 
-## RF21 — Cronograma de produção do dia do evento
+## RF21 — Cronograma de produção do dia do show
 
-**Ator:** Produtor. **Prioridade:** Importante. **Processo:** P5.
+**Ator:** Sócio. **Prioridade:** Importante. **Processo:** P5.
 
-Permite montar a linha do tempo da sessão, com tarefas como montagem de palco, passagem de som, abertura de portões, entrada da banda de abertura, show principal e desmontagem, cada uma com horário previsto, responsável e situação. Durante o evento o responsável marca cada etapa como concluída, e o atraso em uma etapa recalcula e destaca visualmente as etapas seguintes, apoiando a decisão da produção em tempo real.
+Permite montar a linha do tempo da sessão, com montagem do equipamento, passagem de som, abertura da porta, banda de abertura, show principal e desmontagem, cada etapa com horário previsto e responsável. O sistema alerta quando o horário de abertura da porta no cronograma diverge do horário anunciado em RF06. Durante o dia, o responsável marca cada etapa como concluída, e um atraso destaca as etapas seguintes. A liberação da portaria em P4 depende da conclusão da passagem de som, porque o dono relatou que o público não pode entrar durante o teste de equipamento.
 
-## RF22 — Painel financeiro e fechamento do evento
+## RF22 — Resultado financeiro e fechamento do show
 
-**Ator:** Financeiro e Produtor. **Prioridade:** Essencial. **Processo:** P6.
+**Ator:** Sócio e Dono. **Prioridade:** Essencial. **Processos:** P3, P6. **Origem:** A16.
 
-Apresenta, por evento e por sessão, a receita bruta de ingressos, as taxas de serviço, os descontos concedidos, os reembolsos, os custos lançados de atrações, fornecedores e equipe, e o resultado líquido. Permite ao Financeiro realizar o fechamento da sessão, congelando os valores e gerando o repasse ao produtor conforme os dados bancários de RF03 e o percentual de comissão da plataforma. O fechamento só é liberado após o encerramento da janela de reembolso, evitando repassar valores sujeitos a estorno. Sessões fechadas ficam bloqueadas para novos lançamentos e a reabertura exige perfil Administrador com justificativa registrada.
+Apresenta por show e por sessão as receitas separadas por canal, online, loja parceira e porta, os descontos, os reembolsos, a comissão da loja parceira, as despesas lançadas em RF33 e o resultado. Logo após o fechamento do caixa da porta, o sistema exibe um resultado prévio, a terceira prioridade do dono, com os valores a receber ainda marcados como pendentes. O fechamento definitivo é feito pelo sócio depois da conferência das despesas e da confirmação do acerto da loja parceira em RF29, congelando os valores. Shows fechados ficam bloqueados para novos lançamentos, e a reabertura exige justificativa registrada em RF25.
 
 ## RF23 — Relatórios gerenciais e exportação
 
-**Ator:** Produtor e Financeiro. **Prioridade:** Importante. **Processo:** P6.
+**Ator:** Dono, Sócio e Administrativo. **Prioridade:** Importante. **Processos:** P5, P6. **Origem:** A16.
 
-Disponibiliza relatórios de vendas por período, por lote, por setor e por forma de pagamento, curva de vendas ao longo do tempo, taxa de comparecimento comparando ingressos vendidos e check-ins realizados, ocorrências de portaria e demonstrativo de resultado por evento. Todos os relatórios permitem filtro por período e evento e exportação em CSV e PDF. A taxa de comparecimento cruza dados de RF12 e RF17 e orienta o dimensionamento de equipe em eventos futuros.
+Disponibiliza relatórios de vendas por canal, lote e forma de pagamento, curva de vendas ao longo do tempo, taxa de comparecimento comparando ingressos vendidos e entradas registradas, uso da lista de convidados por solicitante, ocorrências da portaria e do show e resultado por show, com comparação entre shows na casa e em espaços alugados. Todos os relatórios permitem filtro por período e show e exportação em planilha e PDF, para uso da pessoa que hoje monta a planilha e do contador. O resumo do resultado é apresentado em tela simples no celular, pensando no sócio, que "só quer ver número final".
 
-## RF24 — Notificações e comunicação com o público
+## RF24 — Notificações e comunicação
 
-**Ator:** Sistema e Produtor. **Prioridade:** Importante. **Processos:** P1, P2, P3, P5.
+**Ator:** Sistema. **Prioridade:** Importante. **Processos:** P1, P2, P3, P5. **Origem:** A13, A14.
 
-Envia automaticamente por e-mail a confirmação de compra com os ingressos, o aviso de pagamento recusado ou expirado, a confirmação de cancelamento e reembolso, o lembrete da sessão vinte e quatro horas antes e o aviso de alteração ou cancelamento do evento. Permite ainda ao produtor enviar comunicados a todos os compradores de uma sessão, por exemplo mudança de horário dos portões. Toda comunicação registra data, destinatário e situação de entrega, e o cliente pode optar por não receber mensagens promocionais, mantendo as transacionais.
+Envia automaticamente por e-mail e por mensagem ao telefone a confirmação de compra com o ingresso, o aviso de pagamento recusado ou expirado, a confirmação de cancelamento e reembolso, o lembrete do show vinte e quatro horas antes, o aviso de remarcação ou cancelamento de show de RF31, o convite de escala de RF19 e o aviso de liberação de cota à loja parceira. Permite ainda ao dono enviar comunicado a todos os compradores de uma sessão, por exemplo mudança de horário da porta. Toda comunicação registra data, destinatário e situação de entrega.
 
 ## RF25 — Registro de auditoria das operações críticas
 
-**Ator:** Sistema. **Prioridade:** Desejável. **Processo:** todos.
+**Ator:** Sistema. **Prioridade:** Desejável. **Processo:** apoio a todos. **Origem:** A12, A15.
 
-Registra em trilha de auditoria as operações sensíveis do sistema, incluindo criação e alteração de eventos, lotes e preços, aprovação e publicação, cancelamentos e reembolsos, emissão de cortesias, alterações de dados bancários, fechamento e reabertura financeira e tentativas de acesso negadas. Cada registro guarda usuário, data e hora, endereço de origem, operação, valor anterior e valor novo. A trilha é somente leitura, consultável por Administrador com filtros de período, usuário e tipo de operação, e retida por cinco anos.
+Registra em trilha somente leitura as operações sensíveis: alteração de preços e cotas, inclusão de convidado acima da cota, cancelamentos e reembolsos, vendas e sangrias do caixa da porta, lançamento e exclusão de despesas, fechamento e reabertura de show e tentativas de acesso negadas. Cada registro guarda usuário, data e hora, operação, valor anterior e valor novo. A trilha é consultável pelo dono e pelo sócio, com filtros de período, usuário e tipo de operação, e é retida por cinco anos.
+
+## RF26 — Agenda de datas da casa
+
+**Ator:** Dono e Sócio. **Prioridade:** Essencial. **Processos:** P1, P3. **Origem:** A01.
+
+Substitui o caderno de datas. Apresenta um calendário por local com cada data nas situações Livre, Pré-reservada ou Confirmada. Ao receber uma proposta, o dono consulta a agenda e pré-reserva a data, informando a atração e a validade da pré-reserva. O sistema impede duas pré-reservas ou confirmações para o mesmo local e horário, resolvendo o episódio relatado de quase marcar dois shows no mesmo sábado. A pré-reserva é liberada quando o show é descartado, quando vence sem confirmação ou quando o show é remarcado para outra data em RF31. O dono e o sócio veem a mesma agenda pelo celular.
+
+## RF27 — Distribuição de ingressos por canal
+
+**Ator:** Dono. **Prioridade:** Essencial. **Processos:** P1, P2, P3. **Origem:** A04.
+
+Permite dividir a capacidade da montagem escolhida em cotas por canal: venda online, loja parceira, bilheteria da porta e lista de convidados. A soma das cotas não pode ultrapassar a capacidade. Todas as vendas e reservas, de qualquer canal, baixam de um único estoque consolidado, e o dono vê em tempo real, pelo celular, quanto foi vendido e quanto resta em cada canal e no total, atendendo à primeira prioridade relatada. O dono pode remanejar saldo não vendido de um canal para outro a qualquer momento, e o sistema avisa quando uma cota atinge noventa por cento. Ingressos cancelados voltam à cota do canal de origem.
+
+## RF28 — Lista de convidados com cotas
+
+**Ator:** Dono e Portaria. **Prioridade:** Essencial. **Processos:** P1, P4. **Origem:** A05.
+
+Tira a lista de convidados "da cabeça" do dono. Permite definir, por sessão, quem pode indicar convidados, por exemplo dono, sócio, banda e imprensa, e a cota de cada um. Cada indicado é cadastrado com nome e CPF e ocupa um lugar da cota de convidados de RF27. Incluir nomes acima da cota do solicitante exige aprovação do dono pelo celular, e a inclusão fica registrada em RF25. A lista fecha em horário definido antes da abertura da porta e é baixada pela portaria em RF18. Na porta, o convidado é encontrado pelo CPF ou pelo nome, e cada convite só dá direito a uma entrada. O relatório de RF23 mostra quantos convidados cada solicitante usou, dado que o dono apontou como ingresso que deixou de vender.
+
+## RF29 — Venda pela loja parceira e acerto
+
+**Ator:** Loja parceira e Sócio. **Prioridade:** Essencial. **Processos:** P1, P2, P3, P6. **Origem:** A07.
+
+Permite cadastrar a loja parceira com percentual de comissão e prazo de repasse combinados. O vendedor da loja registra cada venda no momento em que ela acontece, pelo celular, informando nome e CPF do comprador, tipo de ingresso e forma de pagamento. A venda baixa da cota do parceiro em RF27 e gera o ingresso com QR Code de RF12. O dono deixa de depender da planilha enviada dias depois, porque vê as vendas da loja em tempo real. Após o show, o sistema calcula o acerto, total vendido menos a comissão, e o sócio registra o recebimento do repasse, que libera o fechamento de RF22. Cancelamentos de ingressos vendidos na loja são registrados pela própria loja, que devolve o valor ao comprador identificado.
+
+## RF30 — Venda e caixa da bilheteria na porta
+
+**Ator:** Bilheteria. **Prioridade:** Essencial. **Processos:** P3, P4, P6. **Origem:** A08.
+
+Permite à bilheteria abrir o caixa da noite informando o valor inicial em dinheiro, vender ingressos na porta pelo celular recebendo em dinheiro, Pix ou cartão, e emitir o ingresso na hora, que segue para a validação normal da portaria. A venda só é concluída se houver lugar segundo RF32. Toda retirada de dinheiro do caixa, como o pagamento de alguém da equipe durante a noite, é registrada como sangria com motivo e vira despesa em RF33, porque o dono relatou que esse dinheiro "nem deixa rastro". Ao final, a bilheteria fecha o caixa informando o valor contado, e o sistema aponta a diferença em relação ao esperado.
+
+## RF31 — Remarcação e cancelamento de show
+
+**Ator:** Dono e sócio. **Prioridade:** Importante. **Processo:** P3. **Origem:** A13.
+
+Permite remarcar a sessão para nova data, consultando e confirmando a data em RF26, ou cancelar o show inteiro. Na remarcação, os ingressos continuam válidos para a nova data e o sistema avisa todos os compradores por RF24, abrindo um prazo em que o pedido de reembolso é aprovado automaticamente em RF15, porque o dono relatou que nem todos querem ir na nova data. No cancelamento, todos os compradores são avisados e os reembolsos são gerados sem necessidade de pedido. Compromissos com atração e fornecedores são sinalizados para renegociação em RF20.
+
+## RF32 — Controle de lotação em tempo real
+
+**Ator:** Portaria e Bilheteria. **Prioridade:** Essencial. **Processo:** P4. **Origem:** A11.
+
+Mantém a contagem de pessoas dentro da casa a partir das entradas registradas em RF17, exibida a todos os celulares da portaria e da bilheteria, comparada à capacidade da montagem de RF04. O sistema alerta ao atingir noventa por cento e bloqueia a venda na porta ao atingir a capacidade, evitando o episódio relatado de casa lotada com risco de multa dos bombeiros. Havendo saída definitiva registrada pela portaria, a contagem é reduzida. Operando offline, cada aparelho soma as próprias entradas às últimas recebidas dos demais e sinaliza que a contagem pode estar defasada.
+
+## RF33 — Lançamento de despesas e pagamentos
+
+**Ator:** Sócio e Administrativo. **Prioridade:** Essencial. **Processos:** P1, P5, P6. **Origem:** A02, A15.
+
+Permite lançar cada despesa do show, cachê, sinal da atração, equipe, segurança terceirizada, som, luz, aluguel de espaço e outros, com valor, data, quem recebeu, forma de pagamento, origem do dinheiro, caixa da porta ou conta, e foto do recibo ou nota. As despesas previstas em RF19 e RF20 aparecem como pendentes até serem pagas. O lançamento pode ser feito pelo celular durante a noite, para que pagamentos em dinheiro não se percam. Antes do fechamento, a pessoa do administrativo confere as despesas e os comprovantes e lança o que faltar. Despesas lançadas alimentam o resultado de RF22.

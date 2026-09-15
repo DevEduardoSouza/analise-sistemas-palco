@@ -6,13 +6,13 @@ Trabalho da disciplina **Análise de Sistemas**, 3º semestre de ADS, IFBA Irec�
 
 Este repositório é **análise, não implementação**. Não crie código de aplicação, banco de dados nem telas aqui. O produto do trabalho é documentação: Documento de Visão, requisitos e diagramas BPMN.
 
-O tema escolhido pelo grupo é um **sistema de gestão de eventos e shows**, chamado "Palco" no documento.
+O tema escolhido pelo grupo é um **sistema de gestão de shows**, chamado "Palco" no documento, feito para o cliente **Cena Livre**, uma casa de shows. Os requisitos e processos saem da entrevista simulada com o dono, em `docs/entrevista.md`; cada requisito cita o problema relatado (A01 a A16) que o originou.
 
 ## O que o professor pediu
 
 Do mural do Google Classroom, aviso de 3 de setembro de 2026:
 
-- O Documento de Visão deve contemplar **no mínimo 15 requisitos funcionais devidamente detalhados**. Aqui há 25.
+- O Documento de Visão deve contemplar **no mínimo 15 requisitos funcionais devidamente detalhados**. Aqui há 32 ativos.
 - Os **diagramas BPMN** do processo devem ser incluídos **como anexo ao final do documento**.
 - Deve haver **coerência entre a modelagem dos processos (BPMN) e os requisitos mapeados**. É o que `docs/rastreabilidade.md` demonstra, e é o ponto mais provável de perda de nota se algo for editado pela metade.
 
@@ -41,7 +41,7 @@ Ao acrescentar ou renomear um requisito funcional, atualize os três lugares que
 ## Convenções
 
 - Texto em **português do Brasil**, com acentuação, inclusive dentro dos rótulos dos diagramas.
-- Código de requisito é estável: `RF01` a `RF25` e `RNF01` a `RNF26`. Nunca reaproveite um código de requisito removido.
+- Código de requisito é estável: `RF01` a `RF33` e `RNF01` a `RNF26`. O `RF03` foi retirado. Nunca reaproveite um código de requisito removido. Ao criar um RF novo, atualize também `ULTIMO_RF` em `tools/gen_docs.py`.
 - Processos são `P1` a `P6`, e o nome do arquivo `.bpmn` começa pelo código.
 - Comentários e docstrings nos scripts em português, sem acentuação, para evitar problema de codificação no Windows.
 - `build/` é descartável e não entra no controle de versão.
@@ -51,7 +51,7 @@ Ao acrescentar ou renomear um requisito funcional, atualize os três lugares que
 ```bash
 python tools/render_html.py
 python -m http.server 8899 --directory build
-# abrir http://127.0.0.1:8899/P1-criacao-e-publicacao-de-evento.html
+# abrir http://127.0.0.1:8899/P1-planejamento-e-abertura-de-vendas.html
 ```
 
 As imagens em `bpmn/png/` foram capturadas dessas páginas e são o que se cola no documento final em Word.

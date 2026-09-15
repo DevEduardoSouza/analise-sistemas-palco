@@ -27,43 +27,51 @@ TIPO = {
     "parallel": "Desvio paralelo",
 }
 
+# Requisitos retirados depois da entrevista com o dono da Cena Livre. O codigo
+# nao volta a ser usado.
+RETIRADOS = {"RF03"}
+ULTIMO_RF = 33
+
 RESUMO = {
     "P1": (
-        "Vai da chegada de uma produtora à plataforma até o evento no ar, pronto para vender. "
-        "Concentra os cadastros de base, local, evento, sessões e lotes, e passa por duas "
-        "aprovações do administrador, uma do cadastro da produtora e outra do evento em si. "
-        "As duas aprovações têm caminho de retorno, porque na prática a maior parte dos eventos "
-        "volta para ajuste antes de ser publicada."
+        "Vai da proposta de uma banda até a venda aberta em todos os canais. Nasce da queixa do "
+        "dono de que a agenda fica num caderno e de que a divisão de ingressos entre Instagram, "
+        "loja parceira e porta é feita no chute. Por isso a data é pré-reservada antes da "
+        "negociação do cachê, e a venda só abre depois que o sistema confirma contrato, montagem, "
+        "cotas por canal e lotes. O sócio aparece em raia própria porque é ele quem decide cachê e preço."
     ),
     "P2": (
-        "É o processo de maior volume do sistema e o que sustenta a receita. A reserva temporária "
-        "existe para impedir que dois compradores fechem o mesmo assento e, ao mesmo tempo, para "
-        "devolver o estoque quando a compra é abandonada no meio. O provedor de pagamento aparece "
-        "como raia própria porque é um ator externo, com tempo de resposta fora do controle da equipe."
+        "Reúne num único estoque os dois canais que vendem antes do dia do show: a página de vendas "
+        "divulgada no Instagram e a loja parceira. Na entrevista, o comprovante chegava como print "
+        "no WhatsApp e a loja informava as vendas dias depois. Aqui o pagamento online é confirmado "
+        "pelo provedor, sem print, e a loja registra cada venda na hora, com nome e CPF, baixando "
+        "da própria cota. Os dois caminhos terminam no mesmo ingresso com QR Code."
     ),
     "P3": (
-        "Separa o que pode ser resolvido por regra do que precisa de decisão humana. Dentro da "
-        "janela de sete dias e a mais de quarenta e oito horas da sessão, o cancelamento é "
-        "automático. Fora dela, o financeiro analisa e pode recusar com justificativa. Nos dois "
-        "caminhos o ingresso é invalidado antes de qualquer estorno, para não abrir a porta de "
-        "usar o ingresso e receber o dinheiro de volta."
+        "Tem dois gatilhos. O cliente que desiste da compra e a banda que adia ou cancela o show, "
+        "situação relatada pelo dono. Na remarcação o sistema avisa todos os compradores e abre um "
+        "prazo em que a devolução é automática. A devolução segue o canal de origem: estorno pelo "
+        "provedor para compras online e devolução pela bilheteria ou pela loja para as demais, "
+        "sempre para o comprador identificado na venda, o que evita devolver à pessoa errada."
     ),
     "P4": (
-        "Roda no dia do evento, sob pressão de fila e com rede instável. A validação acontece no "
-        "próprio aparelho, contra a lista baixada antes da abertura dos portões, e a sincronização "
-        "com o servidor é posterior. O desvio de três saídas reflete o que o operador vê na tela: "
-        "libera, nega ou confere documento."
+        "Roda na porta da casa, sob fila e com internet instável. O aplicativo baixa ingressos e lista "
+        "de convidados antes da abertura e valida sem rede. Quem chega sem ingresso só compra na "
+        "porta se ainda houver lugar, porque a lotação é contada a cada entrada, resposta direta ao "
+        "episódio em que a casa lotou com gente de ingresso na mão. O desvio de três saídas reflete "
+        "o que o porteiro vê: libera, nega ou confere documento."
     ),
     "P5": (
-        "Cobre a operação em torno do show, do fechamento das atrações à execução do dia. O laço "
-        "sobre o cronograma é a parte mais usada na prática, porque atraso de passagem de som "
-        "empurra todo o resto e a produção precisa ver o efeito na hora."
+        "Cobre a equipe e o dia do show. Hoje a escala é combinada por mensagem e há quem esqueça "
+        "o compromisso, então o convite sai pelo sistema e cada pessoa confirma, com laço de "
+        "substituição quando alguém não confirma. Os pagamentos feitos em dinheiro durante a noite "
+        "são lançados no mesmo dia, para não se perderem até o fechamento."
     ),
     "P6": (
-        "Começa por tempo, e não por ação de usuário, quando encerra a janela de reembolso da "
-        "sessão. Essa espera é deliberada: fechar antes significaria repassar ao produtor dinheiro "
-        "que ainda pode ser estornado. O laço de correção devolve o fluxo à consolidação de custos, "
-        "que é onde os erros de lançamento aparecem."
+        "Substitui a reunião na cozinha do sócio, dias depois do show, com caderno e recibos. Logo "
+        "após o fechamento do caixa da porta o sistema mostra um resultado prévio, a terceira "
+        "prioridade do dono. O fechamento definitivo espera a conferência das despesas e o acerto "
+        "da loja parceira, que repassa as vendas descontada a comissão combinada."
     ),
 }
 
@@ -140,7 +148,7 @@ def rastreabilidade():
         out.append(f"| {rf} | {', '.join(procs)} | {ativ} |")
     out.append("")
 
-    todos = {f"RF{i:02d}" for i in range(1, 26)}
+    todos = {f"RF{i:02d}" for i in range(1, ULTIMO_RF + 1)} - RETIRADOS
     sem_processo = sorted(todos - set(rf_para))
     out.append("## Requisitos sem atividade correspondente")
     out.append("")
@@ -153,7 +161,15 @@ def rastreabilidade():
         for rf in sem_processo:
             out.append(f"- {rf}")
     else:
-        out.append("Nenhum. Todos os 25 requisitos funcionais aparecem em ao menos um processo.")
+        out.append(f"Nenhum. Todos os {len(todos)} requisitos funcionais ativos aparecem em ao menos um processo.")
+    out.append("")
+    out.append("## Requisitos retirados")
+    out.append("")
+    out.append(
+        "O RF03, cadastro de produtora com aprovação por administrador, foi retirado depois da "
+        "entrevista com o dono da Cena Livre, porque o sistema atende uma única casa de shows e "
+        "não uma plataforma de várias produtoras. O código não é reaproveitado."
+    )
     out.append("")
     return "\n".join(out)
 
