@@ -107,7 +107,7 @@ Relacionamentos: UC41 `<<include>>` UC39 e UC38, porque o show só fecha depois 
 |---|---|---|---|
 | UC43 — Notificar por e-mail e mensagem | — | Serviço de e-mail e mensagem | RF24 |
 
-O UC43 não é iniciado por ator humano. É incluído pelos casos que precisam avisar alguém: UC11, UC14, UC18, UC21, UC24, UC25, UC32 e UC33. Nos diagramas ele aparece uma única vez, no pacote em que está sendo desenhado, para não poluir o desenho.
+O UC43 não é iniciado por ator humano. É incluído pelos casos que precisam avisar alguém: UC11, UC14, UC18, UC21, UC24, UC25, UC32 e UC33. Para não poluir os desenhos com a mesma elipse repetida sete vezes, ele é desenhado uma única vez, no pacote Acesso e administração, e nos demais pacotes aparece apenas o ator secundário Serviço de e-mail e mensagem ligado ao caso que dispara o aviso.
 
 ## 9. Cobertura dos requisitos
 
